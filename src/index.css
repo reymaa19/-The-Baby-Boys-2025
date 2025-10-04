@@ -1,68 +1,280 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  font-family: 'Arial', sans-serif;
+  background: #0a0a0a;
+  color: white;
+  overflow-x: hidden;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+/* Custom keyframe animations */
+@keyframes asteroidFall {
+  0% {
+    transform: translate(0, -100px) rotate(0deg);
+    opacity: 0;
   }
-  a:hover {
-    color: #747bff;
+  10% {
+    opacity: 1;
   }
-  button {
-    background-color: #f9f9f9;
+  100% {
+    transform: translate(80vw, calc(100vh + 200px)) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+@keyframes asteroidRealImpact {
+  0% {
+    transform: translate(-20vw, -30vh) rotate(0deg) scale(1.5);
+    opacity: 0.8;
+  }
+  5% {
+    opacity: 1;
+  }
+  95% {
+    transform: translate(70vw, 70vh) rotate(340deg) scale(0.2);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(70vw, 70vh) rotate(360deg) scale(0.1);
+    opacity: 0;
+  }
+}
+
+@keyframes earthDestruction {
+  0% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+    filter: drop-shadow(0 0 50px rgba(74, 144, 226, 0.3));
+  }
+  98% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+    filter: drop-shadow(0 0 50px rgba(74, 144, 226, 0.3));
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 0;
+    filter: drop-shadow(0 0 50px rgba(74, 144, 226, 0.3));
+  }
+}
+
+@keyframes miniExplosion {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  10% {
+    transform: scale(0.3);
+    opacity: 1;
+  }
+  30% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  60% {
+    transform: scale(1.5);
+    opacity: 0.8;
+  }
+  80% {
+    transform: scale(2);
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+@keyframes massiveExplosion {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  5% {
+    transform: scale(0.1);
+    opacity: 1;
+  }
+  15% {
+    transform: scale(1.5);
+    opacity: 1;
+  }
+  25% {
+    transform: scale(2.5);
+    opacity: 0.95;
+  }
+  40% {
+    transform: scale(4);
+    opacity: 0.85;
+  }
+  60% {
+    transform: scale(6);
+    opacity: 0.7;
+  }
+  75% {
+    transform: scale(8);
+    opacity: 0.5;
+  }
+  85% {
+    transform: scale(10);
+    opacity: 0.3;
+  }
+  95% {
+    transform: scale(12);
+    opacity: 0.1;
+  }
+  100% {
+    transform: scale(14);
+    opacity: 0;
+  }
+}
+
+@keyframes shockwave {
+  0% {
+    transform: scale(0);
+    opacity: 0.8;
+    border-width: 10px;
+  }
+  10% {
+    opacity: 0.9;
+    border-width: 9px;
+  }
+  25% {
+    opacity: 0.8;
+    border-width: 8px;
+  }
+  40% {
+    opacity: 0.6;
+    border-width: 6px;
+  }
+  60% {
+    opacity: 0.4;
+    border-width: 4px;
+  }
+  80% {
+    opacity: 0.2;
+    border-width: 3px;
+  }
+  95% {
+    opacity: 0.05;
+    border-width: 2px;
+  }
+  100% {
+    transform: scale(15);
+    opacity: 0;
+    border-width: 1px;
+  }
+}
+
+@keyframes screenShake {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-8px, -4px); }
+  20% { transform: translate(8px, 4px); }
+  30% { transform: translate(-6px, -8px); }
+  40% { transform: translate(6px, 8px); }
+  50% { transform: translate(-4px, -2px); }
+  60% { transform: translate(4px, 2px); }
+  70% { transform: translate(-2px, -6px); }
+  80% { transform: translate(2px, 6px); }
+  90% { transform: translate(-1px, -1px); }
+}
+
+@keyframes debrisExplosion {
+  0% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  20% {
+    opacity: 1;
+  }
+  40% {
+    opacity: 0.9;
+  }
+  60% {
+    opacity: 0.7;
+  }
+  80% {
+    opacity: 0.4;
+    transform: translate(calc(var(--debris-x) * 0.8), calc(var(--debris-y) * 0.8)) scale(0.6) rotate(400deg);
+  }
+  95% {
+    opacity: 0.1;
+    transform: translate(calc(var(--debris-x) * 0.95), calc(var(--debris-y) * 0.95)) scale(0.2) rotate(650deg);
+  }
+  100% {
+    transform: translate(var(--debris-x), var(--debris-y)) scale(0) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+@keyframes atmosphericTrail {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scaleX(1) scaleY(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleX(1.2) scaleY(0.8);
+  }
+}
+
+@keyframes earthRotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+@keyframes glow {
+  0% {
+    text-shadow: 0 0 10px rgba(255, 107, 53, 0.8), 0 0 20px rgba(255, 107, 53, 0.6), 0 0 30px rgba(255, 107, 53, 0.4);
+  }
+  100% {
+    text-shadow: 0 0 15px rgba(255, 107, 53, 1), 0 0 25px rgba(255, 107, 53, 0.8), 0 0 35px rgba(255, 107, 53, 0.6), 0 0 45px rgba(255, 107, 53, 0.4);
+  }
+}
+
+@keyframes pulse {
+  0% { 
+    opacity: 0.8; 
+    transform: scale(1) rotate(-2deg);
+  }
+  50% { 
+    opacity: 1; 
+    transform: scale(1.1) rotate(1deg);
+  }
+  100% { 
+    opacity: 0.8; 
+    transform: scale(1) rotate(2deg);
+  }
+}
+
+@keyframes flameFlicker {
+  0% { 
+    opacity: 0.9; 
+    transform: scaleX(1) skew(-15deg, 0deg);
+  }
+  25% { 
+    opacity: 0.7; 
+    transform: scaleX(0.95) skew(-12deg, 0deg);
+  }
+  50% { 
+    opacity: 1; 
+    transform: scaleX(1.05) skew(-18deg, 0deg);
+  }
+  75% { 
+    opacity: 0.8; 
+    transform: scaleX(0.98) skew(-14deg, 0deg);
+  }
+  100% { 
+    opacity: 0.9; 
+    transform: scaleX(1) skew(-15deg, 0deg);
   }
 }

@@ -25,3 +25,6 @@ jobs:
           context: .
           push: true
           tags: ryanle3/web-app:cratermaker
+          build-args: |
+            VITE_MAPBOX_API=${{ secrets.VITE_MAPBOX_API }}
+            VITE_NASA_API_KEY=${{ secrets.VITE_NASA_API_KEY }}

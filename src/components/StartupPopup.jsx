@@ -306,7 +306,7 @@ const StartupPopup = ({ onStart }) => {
             background: 'radial-gradient(circle, #ffffff 0%, #ffff00 20%, #ff8c00 50%, #ff4500 80%, transparent 100%)',
             borderRadius: '50%',
             animation: 'miniExplosion 1.5s ease-out forwards',
-            zIndex: 15,
+            zIndex: 5,
             filter: 'blur(1px)',
             boxShadow: '0 0 100px #ff4500, inset 0 0 30px #ffffff'
           }} />
@@ -325,7 +325,7 @@ const StartupPopup = ({ onStart }) => {
               background: 'radial-gradient(circle, #ffffff 0%, #ffff00 10%, #ff8c00 25%, #ff4500 45%, #ff0000 70%, #8b0000 90%, transparent 100%)',
               borderRadius: '50%',
               animation: 'massiveExplosion 8s ease-out forwards',
-              zIndex: 25,
+              zIndex: 8,
               filter: 'blur(3px)',
               boxShadow: '0 0 300px #ff4500, inset 0 0 100px #ffffff'
             }} />
@@ -341,7 +341,7 @@ const StartupPopup = ({ onStart }) => {
               borderRadius: '50%',
               animation: 'massiveExplosion 9s ease-out forwards',
               animationDelay: '0.3s',
-              zIndex: 24,
+              zIndex: 7,
               filter: 'blur(5px)'
             }} />
 
@@ -356,7 +356,7 @@ const StartupPopup = ({ onStart }) => {
               borderRadius: '50%',
               animation: 'massiveExplosion 10s ease-out forwards',
               animationDelay: '0.5s',
-              zIndex: 23,
+              zIndex: 6,
               filter: 'blur(8px)'
             }} />
 
@@ -370,7 +370,7 @@ const StartupPopup = ({ onStart }) => {
               border: '8px solid rgba(255, 255, 255, 0.9)',
               borderRadius: '50%',
               animation: 'shockwave 6s ease-out forwards',
-              zIndex: 22
+              zIndex: 5
             }} />
 
             <div style={{
@@ -383,7 +383,7 @@ const StartupPopup = ({ onStart }) => {
               borderRadius: '50%',
               animation: 'shockwave 7s ease-out forwards',
               animationDelay: '0.6s',
-              zIndex: 21
+              zIndex: 4
             }} />
 
             <div style={{
@@ -396,7 +396,7 @@ const StartupPopup = ({ onStart }) => {
               borderRadius: '50%',
               animation: 'shockwave 8s ease-out forwards',
               animationDelay: '1.2s',
-              zIndex: 20
+              zIndex: 3
             }} />
 
             {/* Debris Field */}
@@ -419,7 +419,7 @@ const StartupPopup = ({ onStart }) => {
                     borderRadius: Math.random() > 0.5 ? '50%' : `${Math.random() * 50}%`,
                     animation: 'debrisExplosion 6s ease-out forwards',
                     animationDelay: `${Math.random() * 1.5}s`,
-                    zIndex: 15,
+                    zIndex: 2,
                     '--debris-x': `${debrisX}px`,
                     '--debris-y': `${debrisY}px`,
                     boxShadow: '0 0 10px rgba(255, 100, 0, 0.5)'
@@ -443,7 +443,7 @@ const StartupPopup = ({ onStart }) => {
                   transformOrigin: 'bottom center',
                   animation: 'massiveExplosion 5s ease-out forwards',
                   animationDelay: `${0.3 + i * 0.08}s`,
-                  zIndex: 18,
+                  zIndex: 1,
                   filter: 'blur(2px)',
                   boxShadow: '0 0 20px rgba(255, 200, 0, 0.8)'
                 }}
@@ -459,7 +459,7 @@ const StartupPopup = ({ onStart }) => {
               height: '100vh',
               background: 'radial-gradient(circle at 85% 85%, rgba(255,255,255,0.95) 0%, rgba(255,200,0,0.8) 20%, rgba(255,100,0,0.6) 40%, rgba(255,50,0,0.3) 70%, transparent 100%)',
               animation: 'massiveExplosion 4s ease-out forwards',
-              zIndex: 30,
+              zIndex: 1,
               pointerEvents: 'none'
             }} />
           </>

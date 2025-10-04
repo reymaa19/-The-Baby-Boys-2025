@@ -1,22 +1,49 @@
 import { useState } from 'react';
-import MainApp from './components/MainApp';
 import StartupPopup from './components/StartupPopup';
+import JeremyHero from './components/introduction/JeremyHero';
+import { JeremyIntro, MissionIntro, EarthFacts } from './components/introduction/Onboarding';
 import MapComponent from './components/Map';
 
 function App() {
   const [showStartup, setShowStartup] = useState(true);
-  const [showMap, setShowMap] = useState(false);
+  const [currentStep, setCurrentStep] = useState('hero');
+  const [playerName, setPlayerName] = useState('');
 
   const handleStart = () => {
     setShowStartup(false);
   };
 
-  const handleGoToMap = () => {
-    setShowMap(true);
+  const handleHeroStart = () => {
+    setCurrentStep('intro');
   };
 
-  const handleBackToMain = () => {
-    setShowMap(false);
+  const handleIntroComplete = (name) => {
+    setPlayerName(name);
+  };
+
+  const handleStartMission = (name) => {
+    setPlayerName(name);
+    setCurrentStep('mission');
+  };
+
+  const handleMissionContinue = () => {
+    setCurrentStep('facts');
+  };
+
+  const handleLaunchCraterMaker = () => {
+    setCurrentStep('map');
+  };
+
+  const handleBackToIntro = () => {
+    setCurrentStep('intro');
+  };
+
+  const handleBackToMission = () => {
+    setCurrentStep('mission');
+  };
+
+  const handleBackToFacts = () => {
+    setCurrentStep('facts');
   };
 
   const appStyle = {
@@ -28,8 +55,17 @@ function App() {
   return (
     <div style={appStyle}>
       {showStartup && <StartupPopup onStart={handleStart} />}
-      {!showStartup && !showMap && <MainApp onGoToMap={handleGoToMap} />}
-      {!showStartup && showMap && <MapComponent onBack={handleBackToMain} />}
+      {!showStartup && currentStep === 'hero' && <JeremyHero onStart={handleHeroStart} />}
+      {!showStartup && currentStep === 'intro' && (
+        <JeremyIntro onComplete={handleIntroComplete} onStartMission={handleStartMission} />
+      )}
+      {!showStartup && currentStep === 'mission' && (
+        <MissionIntro player={playerName} onBack={handleBackToIntro} onContinue={handleMissionContinue} />
+      )}
+      {!showStartup && currentStep === 'facts' && (
+        <EarthFacts player={playerName} onBack={handleBackToMission} onLaunch={handleLaunchCraterMaker} />
+      )}
+      {!showStartup && currentStep === 'map' && <MapComponent onBack={handleBackToFacts} />}
     </div>
   );
 }

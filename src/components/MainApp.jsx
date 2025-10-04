@@ -1,21 +1,23 @@
 const MainApp = ({ onGoToMap }) => {
+  const isMobile = window.innerWidth <= 768;
+
   const containerStyle = {
     minHeight: '100vh',
     background: 'linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%)',
     color: 'white',
     fontFamily: 'Arial, sans-serif',
-    padding: '2rem'
+    padding: isMobile ? '1rem' : '2rem'
   };
 
   const headerStyle = {
     textAlign: 'center',
-    padding: '2rem 0',
+    padding: isMobile ? '1rem 0' : '2rem 0',
     borderBottom: '2px solid rgba(255, 107, 53, 0.3)',
-    marginBottom: '3rem'
+    marginBottom: isMobile ? '2rem' : '3rem'
   };
 
   const titleStyle = {
-    fontSize: '3rem',
+    fontSize: isMobile ? '2rem' : '3rem',
     color: '#ff6b35',
     margin: '0 0 1rem 0',
     textShadow: '0 0 20px rgba(255, 107, 53, 0.5)',
@@ -23,9 +25,10 @@ const MainApp = ({ onGoToMap }) => {
   };
 
   const subtitleStyle = {
-    fontSize: '1.2rem',
+    fontSize: isMobile ? '1rem' : '1.2rem',
     color: '#cccccc',
-    margin: 0
+    margin: 0,
+    padding: isMobile ? '0 1rem' : 0
   };
 
   const mainStyle = {
@@ -35,7 +38,7 @@ const MainApp = ({ onGoToMap }) => {
 
   const cardContainerStyle = {
     textAlign: 'center',
-    padding: '4rem 2rem',
+    padding: isMobile ? '2rem 1rem' : '4rem 2rem',
     background: 'rgba(255, 255, 255, 0.05)',
     borderRadius: '20px',
     border: '1px solid rgba(255, 107, 53, 0.3)',
@@ -43,20 +46,21 @@ const MainApp = ({ onGoToMap }) => {
   };
 
   const cardTitleStyle = {
-    fontSize: '2.5rem',
+    fontSize: isMobile ? '1.8rem' : '2.5rem',
     color: '#ff6b35',
     marginBottom: '1rem'
   };
 
   const cardTextStyle = {
-    fontSize: '1.3rem',
+    fontSize: isMobile ? '1rem' : '1.3rem',
     color: '#cccccc',
-    marginBottom: '3rem'
+    marginBottom: isMobile ? '2rem' : '3rem',
+    padding: isMobile ? '0 0.5rem' : 0
   };
 
   const buttonStyle = {
-    padding: '1rem 2rem',
-    fontSize: '1.2rem',
+    padding: isMobile ? '0.8rem 1.5rem' : '1rem 2rem',
+    fontSize: isMobile ? '1rem' : '1.2rem',
     fontWeight: 'bold',
     color: 'white',
     background: 'linear-gradient(135deg, #ff6b35, #ff8c42)',
@@ -69,13 +73,13 @@ const MainApp = ({ onGoToMap }) => {
 
   const gridStyle = {
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-    gap: '2rem',
-    marginTop: '3rem'
+    gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fit, minmax(300px, 1fr))',
+    gap: isMobile ? '1rem' : '2rem',
+    marginTop: isMobile ? '2rem' : '3rem'
   };
 
   const featureCardStyle = {
-    padding: '1.5rem',
+    padding: isMobile ? '1rem' : '1.5rem',
     background: 'rgba(255, 255, 255, 0.05)',
     borderRadius: '12px',
     border: '1px solid rgba(255, 107, 53, 0.2)',
@@ -83,14 +87,15 @@ const MainApp = ({ onGoToMap }) => {
   };
 
   const featureCardTitleStyle = {
-    fontSize: '1.25rem',
+    fontSize: isMobile ? '1.1rem' : '1.25rem',
     fontWeight: 'bold',
     color: '#ff6b35',
     marginBottom: '0.75rem'
   };
 
   const featureCardTextStyle = {
-    color: '#cccccc'
+    color: '#cccccc',
+    fontSize: isMobile ? '0.9rem' : '1rem'
   };
 
   return (

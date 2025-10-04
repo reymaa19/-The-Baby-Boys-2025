@@ -227,23 +227,49 @@ function MapComponent({ onBack }) {
 
   const blastZones = createBlastZoneGeoJSON();
 
+  const [isSidebarOpen, setIsSidebarOpen] = useState(window.innerWidth > 768);
+
   return (
     <div style={{ width: '100%', height: '100vh', position: 'relative' }}>
+      {/* Mobile Menu Toggle */}
+      <button
+        onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+        style={{
+          position: 'absolute',
+          top: '10px',
+          left: isSidebarOpen ? '360px' : '10px',
+          zIndex: 3,
+          padding: '12px 16px',
+          backgroundColor: 'rgba(0, 0, 0, 0.85)',
+          color: 'white',
+          border: '1px solid #ff6b35',
+          borderRadius: '8px',
+          cursor: 'pointer',
+          fontSize: '20px',
+          transition: 'left 0.3s ease',
+          display: window.innerWidth <= 768 ? 'block' : 'none'
+        }}
+      >
+        {isSidebarOpen ? '✕' : '☰'}
+      </button>
+
       {/* Asteroid Selector Sidebar */}
       <div style={{
         position: 'absolute',
         top: 0,
-        left: 0,
-        width: '350px',
+        left: isSidebarOpen ? 0 : '-100%',
+        width: window.innerWidth <= 768 ? '85vw' : '350px',
+        maxWidth: '350px',
         height: '100%',
-        backgroundColor: 'rgba(0, 0, 0, 0.85)',
+        backgroundColor: 'rgba(0, 0, 0, 0.95)',
         color: 'white',
         padding: '20px',
         overflowY: 'auto',
-        zIndex: 1,
-        boxShadow: '2px 0 10px rgba(0,0,0,0.5)'
+        zIndex: 2,
+        boxShadow: '2px 0 10px rgba(0,0,0,0.5)',
+        transition: 'left 0.3s ease'
       }}>
-        <h2 style={{ margin: '0 0 20px 0', fontSize: '24px' }}>🌠 Asteroid Impact Simulator</h2>
+        <h2 style={{ margin: '0 0 20px 0', fontSize: window.innerWidth <= 768 ? '20px' : '24px' }}>🌠 Asteroid Impact Simulator</h2>
 
         {onBack && (
           <button
@@ -268,14 +294,17 @@ function MapComponent({ onBack }) {
           <p>Loading asteroids from NASA...</p>
         ) : (
           <>
-            <p style={{ fontSize: '14px', marginBottom: '20px', color: '#aaa' }}>
-              Select an asteroid from NASA's database, then click anywhere on the map to simulate its impact.
+            <p style={{ fontSize: '13px', marginBottom: '20px', color: '#aaa' }}>
+              Select an asteroid from NASA's database, then {window.innerWidth <= 768 ? 'tap' : 'click'} anywhere on the map to simulate its impact.
             </p>
 
             {asteroids.map(asteroid => (
               <div
                 key={asteroid.id}
-                onClick={() => selectAsteroid(asteroid)}
+                onClick={() => {
+                  selectAsteroid(asteroid);
+                  if (window.innerWidth <= 768) setIsSidebarOpen(false);
+                }}
                 style={{
                   padding: '12px',
                   marginBottom: '10px',
@@ -288,10 +317,10 @@ function MapComponent({ onBack }) {
                 onMouseEnter={(e) => e.target.style.backgroundColor = selectedAsteroid?.id === asteroid.id ? '#4a90e2' : '#2a2a2a'}
                 onMouseLeave={(e) => e.target.style.backgroundColor = selectedAsteroid?.id === asteroid.id ? '#4a90e2' : '#1a1a1a'}
               >
-                <div style={{ fontWeight: 'bold', marginBottom: '5px' }}>
+                <div style={{ fontWeight: 'bold', marginBottom: '5px', fontSize: '14px' }}>
                   {asteroid.name} {asteroid.isPotentiallyHazardous && '⚠️'}
                 </div>
-                <div style={{ fontSize: '12px', color: '#ccc' }}>
+                <div style={{ fontSize: '11px', color: '#ccc' }}>
                   Diameter: {(asteroid.diameter).toFixed(2)} km<br/>
                   Velocity: {asteroid.velocity.toFixed(1)} km/s<br/>
                   Close Approach: {asteroid.closeApproachDate}
@@ -306,20 +335,22 @@ function MapComponent({ onBack }) {
       {targetingMode && (
         <div style={{
           position: 'absolute',
-          top: '20px',
+          top: '10px',
           left: '50%',
           transform: 'translateX(-50%)',
           backgroundColor: '#ff6b00',
           color: 'white',
-          padding: '15px 30px',
+          padding: window.innerWidth <= 768 ? '10px 15px' : '15px 30px',
           borderRadius: '8px',
           zIndex: 2,
-          fontSize: '18px',
+          fontSize: window.innerWidth <= 768 ? '14px' : '18px',
           fontWeight: 'bold',
           boxShadow: '0 4px 10px rgba(0,0,0,0.5)',
-          animation: 'pulse 2s infinite'
+          animation: 'pulse 2s infinite',
+          maxWidth: window.innerWidth <= 768 ? '90%' : 'none',
+          textAlign: 'center'
         }}>
-          🎯 Click anywhere on the map to simulate impact with {selectedAsteroid.name}
+          🎯 {window.innerWidth <= 768 ? 'Tap' : 'Click'} map to simulate impact
         </div>
       )}
 
@@ -327,32 +358,36 @@ function MapComponent({ onBack }) {
       {impactData && (
         <div style={{
           position: 'absolute',
-          top: '20px',
-          right: '20px',
-          width: '320px',
-          backgroundColor: 'rgba(0, 0, 0, 0.9)',
+          bottom: window.innerWidth <= 768 ? '10px' : 'auto',
+          top: window.innerWidth <= 768 ? 'auto' : '20px',
+          right: window.innerWidth <= 768 ? '10px' : '20px',
+          left: window.innerWidth <= 768 ? '10px' : 'auto',
+          width: window.innerWidth <= 768 ? 'calc(100% - 20px)' : '320px',
+          maxHeight: window.innerWidth <= 768 ? '50vh' : 'auto',
+          backgroundColor: 'rgba(0, 0, 0, 0.95)',
           color: 'white',
-          padding: '20px',
+          padding: window.innerWidth <= 768 ? '15px' : '20px',
           borderRadius: '10px',
           zIndex: 2,
-          boxShadow: '0 4px 15px rgba(0,0,0,0.6)'
+          boxShadow: '0 4px 15px rgba(0,0,0,0.6)',
+          overflowY: 'auto'
         }}>
-          <h3 style={{ margin: '0 0 15px 0', color: '#ff6b00' }}>💥 Impact Results</h3>
-          <div style={{ fontSize: '14px', lineHeight: '1.8' }}>
-            <p><strong>Asteroid:</strong> {selectedAsteroid.name}</p>
-            <p><strong>Location:</strong> {impactData.location.latitude.toFixed(2)}°, {impactData.location.longitude.toFixed(2)}°</p>
-            <hr style={{ border: '1px solid #333', margin: '10px 0' }} />
-            <p><strong>Energy Released:</strong> {impactData.energyMegatons.toFixed(2)} megatons TNT</p>
-            <p><strong>Crater Diameter:</strong> {impactData.craterDiameter.toFixed(2)} km</p>
-            <p><strong>Total Destruction:</strong> {impactData.totalDestructionRadius.toFixed(2)} km radius</p>
-            <p><strong>Severe Blast Damage:</strong> {impactData.severeBlastRadius.toFixed(2)} km radius</p>
-            <p><strong>Thermal Radiation:</strong> {impactData.thermalRadiationRadius.toFixed(2)} km radius</p>
-            <p><strong>Earthquake Magnitude:</strong> {impactData.earthquakeMagnitude}</p>
+          <h3 style={{ margin: '0 0 10px 0', color: '#ff6b00', fontSize: window.innerWidth <= 768 ? '16px' : '18px' }}>💥 Impact Results</h3>
+          <div style={{ fontSize: window.innerWidth <= 768 ? '12px' : '14px', lineHeight: '1.6' }}>
+            <p style={{ margin: '5px 0' }}><strong>Asteroid:</strong> {selectedAsteroid.name}</p>
+            <p style={{ margin: '5px 0' }}><strong>Location:</strong> {impactData.location.latitude.toFixed(2)}°, {impactData.location.longitude.toFixed(2)}°</p>
+            <hr style={{ border: '1px solid #333', margin: '8px 0' }} />
+            <p style={{ margin: '5px 0' }}><strong>Energy:</strong> {impactData.energyMegatons.toFixed(2)} MT TNT</p>
+            <p style={{ margin: '5px 0' }}><strong>Crater:</strong> {impactData.craterDiameter.toFixed(2)} km</p>
+            <p style={{ margin: '5px 0' }}><strong>Total Destruction:</strong> {impactData.totalDestructionRadius.toFixed(2)} km</p>
+            <p style={{ margin: '5px 0' }}><strong>Severe Blast:</strong> {impactData.severeBlastRadius.toFixed(2)} km</p>
+            <p style={{ margin: '5px 0' }}><strong>Thermal Radiation:</strong> {impactData.thermalRadiationRadius.toFixed(2)} km</p>
+            <p style={{ margin: '5px 0' }}><strong>Earthquake:</strong> {impactData.earthquakeMagnitude} magnitude</p>
           </div>
           <button
             onClick={resetSimulation}
             style={{
-              marginTop: '15px',
+              marginTop: '12px',
               width: '100%',
               padding: '10px',
               backgroundColor: '#ff4444',
@@ -361,7 +396,7 @@ function MapComponent({ onBack }) {
               borderRadius: '5px',
               cursor: 'pointer',
               fontWeight: 'bold',
-              fontSize: '14px'
+              fontSize: '13px'
             }}
           >
             Reset Simulation

@@ -127,8 +127,10 @@ const StartupPopup = ({ onStart }) => {
     padding: '2rem'
   };
 
+  const isMobile = window.innerWidth <= 768;
+
   const title1Style = {
-    fontSize: '4rem',
+    fontSize: isMobile ? '2rem' : '4rem',
     fontWeight: 'bold',
     color: '#ffffff',
     margin: 0,
@@ -139,23 +141,23 @@ const StartupPopup = ({ onStart }) => {
   };
 
   const title2Style = {
-    fontSize: '5rem',
+    fontSize: isMobile ? '3rem' : '5rem',
     fontWeight: 'bold',
     color: '#ff6b35',
-    margin: '0 0 3rem 0',
+    margin: isMobile ? '0 0 2rem 0' : '0 0 3rem 0',
     textShadow: '0 0 15px rgba(255, 107, 53, 1), 0 0 30px rgba(255, 107, 53, 0.8), 0 0 45px rgba(255, 107, 53, 0.6), 0 0 60px rgba(255, 107, 53, 0.4)',
     fontFamily: 'Arial Black, Arial, sans-serif',
     animation: 'glow 2s ease-in-out infinite alternate',
-    letterSpacing: '2px',
+    letterSpacing: isMobile ? '1px' : '2px',
     zIndex: 10,
     position: 'relative'
   };
 
   const buttonStyle = {
     position: 'relative',
-    marginTop: '4rem',
-    padding: '1.5rem 4rem',
-    fontSize: '2rem',
+    marginTop: isMobile ? '2rem' : '4rem',
+    padding: isMobile ? '1rem 2.5rem' : '1.5rem 4rem',
+    fontSize: isMobile ? '1.5rem' : '2rem',
     fontWeight: 'bold',
     color: '#ffffff',
     background: 'linear-gradient(45deg, #ff6b35 0%, #f7931e 50%, #ff6b35 100%)',
@@ -165,7 +167,7 @@ const StartupPopup = ({ onStart }) => {
     boxShadow: '0 10px 30px rgba(255, 107, 53, 0.4), inset 0 2px 10px rgba(255, 255, 255, 0.2)',
     transition: 'all 0.3s ease',
     fontFamily: 'Arial Black, Arial, sans-serif',
-    letterSpacing: '2px',
+    letterSpacing: isMobile ? '1px' : '2px',
     zIndex: 10
   };
 

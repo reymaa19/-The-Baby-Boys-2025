@@ -5,7 +5,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_API;
 const NASA_API_KEY = import.meta.env.VITE_NASA_API_KEY;
 
-function MapComponent() {
+function MapComponent({ onBack }) {
   const [viewState, setViewState] = useState({
     longitude: -100,
     latitude: 40,
@@ -244,6 +244,25 @@ function MapComponent() {
         boxShadow: '2px 0 10px rgba(0,0,0,0.5)'
       }}>
         <h2 style={{ margin: '0 0 20px 0', fontSize: '24px' }}>🌠 Asteroid Impact Simulator</h2>
+
+        {onBack && (
+          <button
+            onClick={onBack}
+            style={{
+              width: '100%',
+              padding: '10px',
+              marginBottom: '20px',
+              backgroundColor: '#444',
+              color: 'white',
+              border: 'none',
+              borderRadius: '5px',
+              cursor: 'pointer',
+              fontSize: '14px'
+            }}
+          >
+            ← Back to Home
+          </button>
+        )}
 
         {loading ? (
           <p>Loading asteroids from NASA...</p>

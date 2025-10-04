@@ -12,6 +12,14 @@ RUN npm ci && npm cache clean --force
 # Copy source code
 COPY . .
 
+# Accept build arguments for environment variables
+ARG VITE_MAPBOX_API
+ARG VITE_NASA_API_KEY
+
+# Set environment variables for Vite build
+ENV VITE_MAPBOX_API=$VITE_MAPBOX_API
+ENV VITE_NASA_API_KEY=$VITE_NASA_API_KEY
+
 # Build the application
 RUN npm run build
 

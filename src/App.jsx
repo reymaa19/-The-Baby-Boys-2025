@@ -1,12 +1,22 @@
 import { useState } from 'react';
 import MainApp from './components/MainApp';
 import StartupPopup from './components/StartupPopup';
+import MapComponent from './components/Map';
 
 function App() {
   const [showStartup, setShowStartup] = useState(true);
+  const [showMap, setShowMap] = useState(false);
 
   const handleStart = () => {
     setShowStartup(false);
+  };
+
+  const handleGoToMap = () => {
+    setShowMap(true);
+  };
+
+  const handleBackToMain = () => {
+    setShowMap(false);
   };
 
   const appStyle = {
@@ -18,7 +28,8 @@ function App() {
   return (
     <div style={appStyle}>
       {showStartup && <StartupPopup onStart={handleStart} />}
-      {!showStartup && <MainApp />}
+      {!showStartup && !showMap && <MainApp onGoToMap={handleGoToMap} />}
+      {!showStartup && showMap && <MapComponent onBack={handleBackToMain} />}
     </div>
   );
 }

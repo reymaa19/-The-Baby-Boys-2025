@@ -28,3 +28,4 @@ jobs:
           build-args: |
             VITE_MAPBOX_API=${{ secrets.VITE_MAPBOX_API }}
             VITE_NASA_API_KEY=${{ secrets.VITE_NASA_API_KEY }}
+            VITE_N8N_WEBHOOK_URL=${{ secrets.VITE_N8N_WEBHOOK_URL}}

@@ -10,13 +10,13 @@ const ImpactResultsPanel = ({ impactData, selectedAsteroid, onReset }) => {
       top: isMobile ? '60px' : '20px',
       right: isMobile ? '10px' : '20px',
       width: isExpanded ? (isMobile ? 'calc(100% - 20px)' : '320px') : 'auto',
-      background: 'rgba(255, 255, 255, 0.05)',
-      backdropFilter: 'blur(10px)',
+      background: 'rgba(0, 0, 0, 0.7)',
+      backdropFilter: 'blur(15px)',
       color: 'white',
       padding: isExpanded ? (isMobile ? '12px' : '20px') : isMobile ? '8px' : '12px',
       borderRadius: isExpanded ? '20px' : '50%',
       zIndex: 2,
-      boxShadow: '0 20px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+      boxShadow: '0 20px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05)',
       border: '1px solid rgba(255, 255, 255, 0.1)',
       animation: 'fadeIn 0.3s ease-out'
     }}>

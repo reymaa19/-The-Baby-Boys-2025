@@ -11,7 +11,7 @@ const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_API;
 const NASA_API_KEY = import.meta.env.VITE_NASA_API_KEY;
 const N8N_WEBHOOK_URL = import.meta.env.VITE_N8N_WEBHOOK_URL;
 
-function MapComponent({ onBack }) {
+function MapComponent({ onBack, onContinueToDashboard }) {
   const [viewState, setViewState] = useState({
     longitude: -100,
     latitude: 40,
@@ -342,6 +342,7 @@ function MapComponent({ onBack }) {
           impactData={impactData}
           selectedAsteroid={selectedAsteroid}
           onReset={resetSimulation}
+          onContinueToDashboard={() => onContinueToDashboard && onContinueToDashboard(asteroids)}
         />
       )}
 

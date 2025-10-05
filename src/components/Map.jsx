@@ -34,6 +34,10 @@ function MapComponent({ onBack }) {
   const [meteorPosition, setMeteorPosition] = useState(null);
   const [meteorTrail, setMeteorTrail] = useState([]);
 
+  // Shockwave animation states
+  const [showShockwave, setShowShockwave] = useState(false);
+  const [shockwaveRadius, setShockwaveRadius] = useState(0);
+
   // Chat popup states
   const [showChat, setShowChat] = useState(false);
   const [chatMessage, setChatMessage] = useState('');
@@ -129,6 +133,9 @@ function MapComponent({ onBack }) {
         const impact = calculateImpact(asteroid, location);
         setImpactData(impact);
 
+        // Trigger shockwave animation
+        animateShockwave();
+
         // Trigger chat popup
         sendWebhookData(targetLng, targetLat, asteroid.diameter);
       }
@@ -137,6 +144,31 @@ function MapComponent({ onBack }) {
     setIsMeteorAnimating(true);
     setMeteorTrail([]);
     animationFrameId = requestAnimationFrame(animate);
+  };
+
+  // Animate shockwave expanding from impact
+  const animateShockwave = () => {
+    setShowShockwave(true);
+    setShockwaveRadius(0);
+
+    const duration = 1500; // 1.5 seconds
+    const startTime = Date.now();
+
+    const animate = () => {
+      const elapsed = Date.now() - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+
+      // Expand radius (up to 500km equivalent on map)
+      setShockwaveRadius(progress * 500);
+
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      } else {
+        setShowShockwave(false);
+      }
+    };
+
+    requestAnimationFrame(animate);
   };
 
   const handleMapClick = (event) => {
@@ -162,6 +194,8 @@ function MapComponent({ onBack }) {
     setIsMeteorAnimating(false);
     setMeteorPosition(null);
     setMeteorTrail([]);
+    setShowShockwave(false);
+    setShockwaveRadius(0);
     setShowChat(false);
     setChatMessage('');
   };
@@ -302,11 +336,10 @@ function MapComponent({ onBack }) {
           <Marker
             longitude={impactLocation.longitude}
             latitude={impactLocation.latitude}
-            anchor="bottom"
+            anchor="center"
           >
             <div style={{
               fontSize: '40px',
-              transform: 'translate(-50%, -100%)',
               filter: 'drop-shadow(0 0 10px rgba(255,0,0,0.8))'
             }}>
               💥
@@ -351,6 +384,36 @@ function MapComponent({ onBack }) {
               </div>
             </Marker>
           </>
+        )}
+
+        {/* Shockwave Animation */}
+        {showShockwave && impactLocation && (
+          <Source type="geojson" data={{
+            type: 'Feature',
+            geometry: {
+              type: 'Point',
+              coordinates: [impactLocation.longitude, impactLocation.latitude]
+            }
+          }}>
+            <Layer
+              id="shockwave-ring"
+              type="circle"
+              paint={{
+                'circle-radius': [
+                  'interpolate',
+                  ['linear'],
+                  ['zoom'],
+                  0, shockwaveRadius / 100,
+                  10, shockwaveRadius
+                ],
+                'circle-color': '#ff6b00',
+                'circle-opacity': Math.max(0, 0.8 - (shockwaveRadius / 500)),
+                'circle-stroke-width': 3,
+                'circle-stroke-color': '#ffffff',
+                'circle-stroke-opacity': Math.max(0, 1 - (shockwaveRadius / 500))
+              }}
+            />
+          </Source>
         )}
 
         {/* Blast Zones */}

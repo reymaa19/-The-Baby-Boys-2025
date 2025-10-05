@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import Map, { NavigationControl, Marker, Layer, Source } from 'react-map-gl/mapbox';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import ChatPopup from './ChatPopup';
 
 const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_API;
 const NASA_API_KEY = import.meta.env.VITE_NASA_API_KEY;
+const N8N_WEBHOOK_URL = import.meta.env.VITE_N8N_WEBHOOK_URL;
 
 function MapComponent({ onBack }) {
   const [viewState, setViewState] = useState({
@@ -23,6 +25,11 @@ function MapComponent({ onBack }) {
   const [isMeteorAnimating, setIsMeteorAnimating] = useState(false);
   const [meteorPosition, setMeteorPosition] = useState(null);
   const [meteorTrail, setMeteorTrail] = useState([]);
+
+  // Chat popup states
+  const [showChat, setShowChat] = useState(false);
+  const [chatMessage, setChatMessage] = useState('');
+  const [chatLoading, setChatLoading] = useState(false);
 
   // Fetch asteroid data from NASA NeoWs API
   useEffect(() => {
@@ -152,6 +159,9 @@ function MapComponent({ onBack }) {
         setImpactLocation(location);
         const impact = calculateImpact(asteroid, location);
         setImpactData(impact);
+
+        // Trigger chat popup with mock webhook response
+        sendWebhookData(targetLng, targetLat, asteroid.diameter);
       }
     };
 
@@ -185,6 +195,48 @@ function MapComponent({ onBack }) {
     setIsMeteorAnimating(false);
     setMeteorPosition(null);
     setMeteorTrail([]);
+    setShowChat(false);
+    setChatMessage('');
+  };
+
+  // Send data to n8n webhook
+  const sendWebhookData = async (longitude, latitude, diameter) => {
+    setShowChat(true);
+    setChatLoading(true);
+
+    try {
+      const response = await fetch(N8N_WEBHOOK_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          longitude,
+          latitude,
+          diameter
+        })
+      });
+
+      // Try to parse as text first (n8n returns text response)
+      const text = await response.text();
+
+      // Check if it's JSON or plain text
+      let message;
+      try {
+        const json = JSON.parse(text);
+        message = json.message || json.output || JSON.stringify(json, null, 2);
+      } catch {
+        // If not JSON, use the text directly
+        message = text;
+      }
+
+      setChatMessage(message);
+      setChatLoading(false);
+    } catch (error) {
+      console.error('Error sending webhook:', error);
+      setChatMessage(`❌ Error connecting to analysis system.\n\nError: ${error.message}\n\nPlease try again later.`);
+      setChatLoading(false);
+    }
   };
 
   // Create blast zone circles
@@ -511,6 +563,15 @@ function MapComponent({ onBack }) {
           }
         }
       `}</style>
+
+      {/* Chat Popup */}
+      {showChat && (
+        <ChatPopup
+          message={chatMessage}
+          loading={chatLoading}
+          onClose={() => setShowChat(false)}
+        />
+      )}
     </div>
   );
 }

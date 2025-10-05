@@ -15,10 +15,12 @@ COPY . .
 # Accept build arguments for environment variables
 ARG VITE_MAPBOX_API
 ARG VITE_NASA_API_KEY
+ARG VITE_N8N_WEBHOOK_URL
 
 # Set environment variables for Vite build
 ENV VITE_MAPBOX_API=$VITE_MAPBOX_API
 ENV VITE_NASA_API_KEY=$VITE_NASA_API_KEY
+ENV VITE_N8N_WEBHOOK_URL=$VITE_N8N_WEBHOOK_URL
 
 # Build the application
 RUN npm run build

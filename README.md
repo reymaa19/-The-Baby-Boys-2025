@@ -1,11 +1,14 @@
-# 🌠 Asteroid Impact Simulator
+# Asteroid Impact Simulator
 
 ## NASA Space Apps Challenge 2025 Submission - Team "The Baby Boys"
 ![Asteroid Impact Simulator](./public/jeremyhansenfront.png)
 
-## 🚀 Live Demo
+## Live Demo
 
 Experience the simulator at: [cratermarker](https://cratermaker.earth)
+
+## Prototype 
+![Prototype](./public/prototype.jpg)
 
 ## 📋 Table of Contents
 

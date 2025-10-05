@@ -2,11 +2,13 @@ import { useState } from 'react';
 import StartupPopup from './components/StartupPopup';
 import { JeremyIntro, MissionIntro, EarthFacts, CraterMaker } from './components/introduction/Onboarding';
 import MapComponent from './components/Map';
+import NASADashboard from './components/NASADashboard';
 
 function App() {
   const [showStartup, setShowStartup] = useState(true);
   const [currentStep, setCurrentStep] = useState('intro');
   const [playerName, setPlayerName] = useState('');
+  const [asteroidData, setAsteroidData] = useState([]);
 
   const handleStart = () => {
     setShowStartup(false);
@@ -45,6 +47,15 @@ function App() {
     setCurrentStep('facts');
   };
 
+  const handleContinueToDashboard = (asteroids) => {
+    setAsteroidData(asteroids);
+    setCurrentStep('dashboard');
+  };
+
+  const handleBackToMap = () => {
+    setCurrentStep('map');
+  };
+
   const appStyle = {
     width: '100%',
     minHeight: '100vh',
@@ -66,7 +77,18 @@ function App() {
       {!showStartup && currentStep === 'crater' && (
         <CraterMaker player={playerName} onBack={handleBackToFacts} onLaunch={handleLaunchCraterMaker} />
       )}
-      {!showStartup && currentStep === 'map' && <MapComponent onBack={handleBackToFacts} />}
+      {!showStartup && currentStep === 'map' && (
+        <MapComponent
+          onBack={handleBackToFacts}
+          onContinueToDashboard={handleContinueToDashboard}
+        />
+      )}
+      {!showStartup && currentStep === 'dashboard' && (
+        <NASADashboard
+          asteroids={asteroidData}
+          onBack={handleBackToMap}
+        />
+      )}
     </div>
   );
 }

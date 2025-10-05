@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const ImpactResultsPanel = ({ impactData, selectedAsteroid, onReset }) => {
+const ImpactResultsPanel = ({ impactData, selectedAsteroid, onReset, onContinueToDashboard }) => {
   const isMobile = window.innerWidth <= 768;
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -75,6 +75,38 @@ const ImpactResultsPanel = ({ impactData, selectedAsteroid, onReset }) => {
           <strong>Earthquake:</strong> {impactData.earthquakeMagnitude} magnitude
         </p>
       </div>
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            onContinueToDashboard && onContinueToDashboard();
+          }}
+          style={{
+            marginTop: '8px',
+            width: '100%',
+            padding: isMobile ? '8px' : '10px',
+            background: 'linear-gradient(45deg, #4a9eff 0%, #5db0ff 50%, #4a9eff 100%)',
+            color: 'white',
+            border: 'none',
+            borderRadius: '25px',
+            cursor: 'pointer',
+            fontSize: isMobile ? '12px' : '14px',
+            fontWeight: 'bold',
+            boxShadow: '0 5px 15px rgba(74, 158, 255, 0.4)',
+            transition: 'all 0.3s ease',
+            textTransform: 'uppercase',
+            letterSpacing: '0.5px'
+          }}
+          onMouseEnter={(e) => {
+            e.target.style.transform = 'scale(1.05)';
+            e.target.style.boxShadow = '0 8px 25px rgba(74, 158, 255, 0.6)';
+          }}
+          onMouseLeave={(e) => {
+            e.target.style.transform = 'scale(1)';
+            e.target.style.boxShadow = '0 5px 15px rgba(74, 158, 255, 0.4)';
+          }}
+        >
+          Continue to NASA Data Dashboard →
+        </button>
         <button
           onClick={(e) => {
             e.stopPropagation();

@@ -11,7 +11,7 @@ const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_API;
 const NASA_API_KEY = import.meta.env.VITE_NASA_API_KEY;
 const N8N_WEBHOOK_URL = import.meta.env.VITE_N8N_WEBHOOK_URL;
 
-function MapComponent({ onBack }) {
+function MapComponent({ onBack, onContinueToDashboard }) {
   const [viewState, setViewState] = useState({
     longitude: -100,
     latitude: 40,
@@ -94,13 +94,28 @@ function MapComponent({ onBack }) {
 
   // Animate meteor entry from space to impact
   const animateMeteorEntry = (targetLng, targetLat, asteroid) => {
+    // Validate target coordinates
+    if (!targetLat || !targetLng || targetLat < -90 || targetLat > 90 || targetLng < -180 || targetLng > 180) {
+      alert("⚠️ You can't do that! Please click on a valid location on Earth.");
+      setTargetingMode(true); // Keep targeting mode active
+      return;
+    }
+
     // Meteors come from SPACE (nearly vertical entry, 75-85° from horizontal)
     const entryAngle = Math.random() * 360 * (Math.PI / 180);
     const entryDistanceLat = 8;
     const entryDistanceLng = 2;
 
-    const startLng = targetLng + Math.cos(entryAngle) * entryDistanceLng;
-    const startLat = targetLat + Math.sin(entryAngle) * entryDistanceLat;
+    // Calculate start position and clamp to valid coordinates
+    let startLng = targetLng + Math.cos(entryAngle) * entryDistanceLng;
+    let startLat = targetLat + Math.sin(entryAngle) * entryDistanceLat;
+
+    // Clamp latitude to valid range (-90 to 90)
+    startLat = Math.max(-90, Math.min(90, startLat));
+
+    // Wrap longitude to valid range (-180 to 180)
+    while (startLng > 180) startLng -= 360;
+    while (startLng < -180) startLng += 360;
 
     // Animation based on velocity (faster asteroids = shorter animation)
     const baseSpeed = 2000; // milliseconds
@@ -327,6 +342,7 @@ function MapComponent({ onBack }) {
           impactData={impactData}
           selectedAsteroid={selectedAsteroid}
           onReset={resetSimulation}
+          onContinueToDashboard={() => onContinueToDashboard && onContinueToDashboard(asteroids)}
         />
       )}
 

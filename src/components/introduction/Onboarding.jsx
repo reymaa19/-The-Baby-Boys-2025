@@ -15,7 +15,7 @@ export function JeremyIntro({ onComplete, onStartMission }) {
   return (
     <div className="intro-root">
       <div className="intro-card">
-        <img src={'/jeremyhansenfront.jpg'} alt="Jeremy Hansen speaking" className="intro-img"/>
+        <img src={'/jeremyhansenfront.png'} alt="Jeremy Hansen speaking" className="intro-img"/>
 
         <div className="speech">
           {!submitted ? (
@@ -55,7 +55,7 @@ export function MissionIntro({ player, onBack, onContinue }) {
   return (
     <div className="mission-root">
       <div className="mission-card">
-        <img src={'/jeremyhansenfront.jpg'} alt="Jeremy Hansen" className="mission-img"/>
+        <img src={'/jeremyhansenfront.png'} alt="Jeremy Hansen" className="mission-img"/>
         <div className="mission-copy">
           <h2>Alright Cadet {player}, nice to meet you!</h2>
           <p className="lead">Let me show you around.</p>
@@ -92,7 +92,7 @@ export function EarthFacts({ player, onBack, onLaunch }) {
   return (
     <div className="facts-root">
       <div className="facts-card">
-        <img src={'/jeremyhansenfront.jpg'} alt="Jeremy Hansen" className="facts-img"/>
+        <img src={'/jeremyhansenfront.png'} alt="Jeremy Hansen" className="facts-img"/>
         <div className="facts-copy">
           <h2>Hey Cadet {player}!</h2>
           <div className="crater">

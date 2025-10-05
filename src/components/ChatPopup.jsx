@@ -47,10 +47,12 @@ function ChatPopup({ message, loading, onClose }) {
       }}>
         <div style={{
           position: 'relative',
-          backgroundColor: 'rgba(255, 255, 255, 0.95)',
+          background: 'rgba(0, 0, 0, 0.7)',
+          backdropFilter: 'blur(15px)',
           borderRadius: '20px',
           padding: isMobile ? '16px 18px' : '20px 24px',
-          boxShadow: '0 8px 30px rgba(0, 0, 0, 0.4)',
+          boxShadow: '0 20px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05)',
+          border: '1px solid rgba(255, 255, 255, 0.1)',
           maxHeight: isMobile ? '60vh' : '500px',
           overflowY: 'auto',
           overflowX: 'hidden'
@@ -64,7 +66,7 @@ function ChatPopup({ message, loading, onClose }) {
             height: '0',
             borderTop: '12px solid transparent',
             borderBottom: '12px solid transparent',
-            borderLeft: '12px solid rgba(255, 255, 255, 0.95)'
+            borderLeft: '12px solid rgba(0, 0, 0, 0.7)'
           }}></div>
 
           {/* Close Button */}
@@ -76,7 +78,7 @@ function ChatPopup({ message, loading, onClose }) {
               right: '8px',
               background: 'transparent',
               border: 'none',
-              color: '#999',
+              color: 'rgba(255, 255, 255, 0.5)',
               fontSize: '24px',
               cursor: 'pointer',
               padding: '0',
@@ -89,7 +91,7 @@ function ChatPopup({ message, loading, onClose }) {
               lineHeight: '1'
             }}
             onMouseEnter={(e) => e.target.style.color = '#ff6b35'}
-            onMouseLeave={(e) => e.target.style.color = '#999'}
+            onMouseLeave={(e) => e.target.style.color = 'rgba(255, 255, 255, 0.5)'}
           >
             ×
           </button>
@@ -98,7 +100,10 @@ function ChatPopup({ message, loading, onClose }) {
           <div style={{
             fontSize: isMobile ? '14px' : '15px',
             fontWeight: 'bold',
-            color: '#ff6b35',
+            background: 'linear-gradient(45deg, #ff6b35, #f7931e)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
             marginBottom: '10px'
           }}>
             Jeremy Hansen
@@ -146,12 +151,13 @@ function ChatPopup({ message, loading, onClose }) {
             </div>
           ) : message ? (
             <div style={{
-              color: '#1a1a1a',
+              color: '#ffffff',
               fontSize: isMobile ? '14px' : '15px',
               lineHeight: '1.6',
               whiteSpace: 'pre-wrap',
               wordWrap: 'break-word',
-              overflowWrap: 'break-word'
+              overflowWrap: 'break-word',
+              textShadow: '0 2px 10px rgba(0, 0, 0, 0.5)'
             }}>
               {message}
             </div>

@@ -10,12 +10,14 @@ const ImpactResultsPanel = ({ impactData, selectedAsteroid, onReset }) => {
       top: isMobile ? '60px' : '20px',
       right: isMobile ? '10px' : '20px',
       width: isExpanded ? (isMobile ? 'calc(100% - 20px)' : '320px') : 'auto',
-      backgroundColor: 'rgba(0, 0, 0, 0.95)',
+      background: 'rgba(255, 255, 255, 0.05)',
+      backdropFilter: 'blur(10px)',
       color: 'white',
       padding: isExpanded ? (isMobile ? '12px' : '20px') : isMobile ? '8px' : '12px',
-      borderRadius: isExpanded ? '10px' : '50%',
+      borderRadius: isExpanded ? '20px' : '50%',
       zIndex: 2,
-      boxShadow: '0 4px 15px rgba(0,0,0,0.6)',
+      boxShadow: '0 20px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+      border: '1px solid rgba(255, 255, 255, 0.1)',
       animation: 'fadeIn 0.3s ease-out'
     }}>
       <div
@@ -82,13 +84,25 @@ const ImpactResultsPanel = ({ impactData, selectedAsteroid, onReset }) => {
             marginTop: '8px',
             width: '100%',
             padding: isMobile ? '8px' : '10px',
-            backgroundColor: '#ff4444',
+            background: 'linear-gradient(45deg, #ff4444 0%, #ff6b6b 50%, #ff4444 100%)',
             color: 'white',
             border: 'none',
-            borderRadius: '5px',
+            borderRadius: '25px',
             cursor: 'pointer',
             fontSize: isMobile ? '12px' : '14px',
-            fontWeight: 'bold'
+            fontWeight: 'bold',
+            boxShadow: '0 5px 15px rgba(255, 68, 68, 0.4)',
+            transition: 'all 0.3s ease',
+            textTransform: 'uppercase',
+            letterSpacing: '0.5px'
+          }}
+          onMouseEnter={(e) => {
+            e.target.style.transform = 'scale(1.05)';
+            e.target.style.boxShadow = '0 8px 25px rgba(255, 68, 68, 0.6)';
+          }}
+          onMouseLeave={(e) => {
+            e.target.style.transform = 'scale(1)';
+            e.target.style.boxShadow = '0 5px 15px rgba(255, 68, 68, 0.4)';
           }}
         >
           Reset Simulation

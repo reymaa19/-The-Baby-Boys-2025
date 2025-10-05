@@ -10,7 +10,7 @@ function ChatPopup({ message, loading, onClose }) {
       {/* Avatar - Fixed at bottom right */}
       <img
         src="/chat_avatar.png"
-        alt="Jeremy Hansen"
+        alt="Jeremy Ransen"
         onClick={() => setIsMinimized(!isMinimized)}
         style={{
           position: 'absolute',
@@ -106,7 +106,7 @@ function ChatPopup({ message, loading, onClose }) {
             backgroundClip: 'text',
             marginBottom: '10px'
           }}>
-            Jeremy Hansen
+            Jeremy Ransen
           </div>
 
           {/* Message Content */}

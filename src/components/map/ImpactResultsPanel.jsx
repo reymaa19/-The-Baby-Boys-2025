@@ -1,66 +1,116 @@
+import { useState } from 'react';
+
 const ImpactResultsPanel = ({ impactData, selectedAsteroid, onReset }) => {
   const isMobile = window.innerWidth <= 768;
+  const [isExpanded, setIsExpanded] = useState(false);
 
   return (
     <div style={{
       position: 'absolute',
-      bottom: isMobile ? '10px' : 'auto',
-      top: isMobile ? 'auto' : '20px',
+      top: isMobile ? '60px' : '20px',
       right: isMobile ? '10px' : '20px',
-      left: isMobile ? '10px' : 'auto',
-      width: isMobile ? 'calc(100% - 20px)' : '320px',
-      maxHeight: isMobile ? '50vh' : 'auto',
+      width: isExpanded ? (isMobile ? 'calc(100% - 20px)' : '320px') : 'auto',
       backgroundColor: 'rgba(0, 0, 0, 0.95)',
       color: 'white',
-      padding: isMobile ? '15px' : '20px',
-      borderRadius: '10px',
+      padding: isExpanded ? (isMobile ? '12px' : '20px') : isMobile ? '8px' : '12px',
+      borderRadius: isExpanded ? '10px' : '50%',
       zIndex: 2,
       boxShadow: '0 4px 15px rgba(0,0,0,0.6)',
-      overflowY: 'auto'
+      animation: 'fadeIn 0.3s ease-out'
     }}>
-      <h3 style={{ margin: '0 0 10px 0', color: '#ff6b00', fontSize: isMobile ? '16px' : '18px' }}>
-        💥 Impact Results
-      </h3>
-      <div style={{ fontSize: isMobile ? '12px' : '14px', lineHeight: '1.6' }}>
-        <p style={{ margin: '5px 0' }}><strong>Asteroid:</strong> {selectedAsteroid.name}</p>
-        <p style={{ margin: '5px 0' }}>
+      <div
+        onClick={() => setIsExpanded(!isExpanded)}
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '10px',
+          marginBottom: isExpanded ? '8px' : '0',
+          cursor: 'pointer'
+        }}
+      >
+        <div
+          style={{
+            width: isMobile ? '35px' : '45px',
+            height: isMobile ? '35px' : '45px',
+            borderRadius: '50%',
+            border: '2px solid #ff6b00',
+            boxShadow: '0 2px 10px rgba(255, 107, 0, 0.5)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            background: 'linear-gradient(135deg, #ff6b00 0%, #ff8800 100%)',
+            fontSize: isMobile ? '20px' : '24px'
+          }}
+        >
+          💥
+        </div>
+        {isExpanded && (
+          <h3 style={{ margin: 0, color: '#ff6b00', fontSize: isMobile ? '14px' : '18px', flex: 1 }}>
+            💥 Impact Results
+          </h3>
+        )}
+      </div>
+      {isExpanded && (
+        <div style={{ animation: 'fadeIn 0.3s ease-out' }}>
+      <div style={{ fontSize: isMobile ? '11px' : '14px', lineHeight: '1.4' }}>
+        <p style={{ margin: '3px 0' }}><strong>Asteroid:</strong> {selectedAsteroid.name}</p>
+        <p style={{ margin: '3px 0' }}>
           <strong>Location:</strong> {impactData.location.latitude.toFixed(2)}°, {impactData.location.longitude.toFixed(2)}°
         </p>
-        <hr style={{ border: '1px solid #333', margin: '8px 0' }} />
-        <p style={{ margin: '5px 0' }}><strong>Energy:</strong> {impactData.energyMegatons.toFixed(2)} MT TNT</p>
-        <p style={{ margin: '5px 0' }}><strong>Crater:</strong> {impactData.craterDiameter.toFixed(2)} km</p>
-        <p style={{ margin: '5px 0' }}>
+        <hr style={{ border: '1px solid #333', margin: '6px 0' }} />
+        <p style={{ margin: '3px 0' }}><strong>Energy:</strong> {impactData.energyMegatons.toFixed(2)} MT TNT</p>
+        <p style={{ margin: '3px 0' }}><strong>Crater:</strong> {impactData.craterDiameter.toFixed(2)} km</p>
+        <p style={{ margin: '3px 0' }}>
           <strong>Total Destruction:</strong> {impactData.totalDestructionRadius.toFixed(2)} km
         </p>
-        <p style={{ margin: '5px 0' }}>
+        <p style={{ margin: '3px 0' }}>
           <strong>Severe Blast:</strong> {impactData.severeBlastRadius.toFixed(2)} km
         </p>
-        <p style={{ margin: '5px 0' }}>
+        <p style={{ margin: '3px 0' }}>
           <strong>Thermal Radiation:</strong> {impactData.thermalRadiationRadius.toFixed(2)} km
         </p>
-        <p style={{ margin: '5px 0' }}>
+        <p style={{ margin: '3px 0' }}>
           <strong>Earthquake:</strong> {impactData.earthquakeMagnitude} magnitude
         </p>
       </div>
-      <button
-        onClick={onReset}
-        style={{
-          marginTop: '12px',
-          width: '100%',
-          padding: '10px',
-          backgroundColor: '#ff4444',
-          color: 'white',
-          border: 'none',
-          borderRadius: '5px',
-          cursor: 'pointer',
-          fontSize: '14px',
-          fontWeight: 'bold'
-        }}
-      >
-        Reset Simulation
-      </button>
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            onReset();
+          }}
+          style={{
+            marginTop: '8px',
+            width: '100%',
+            padding: isMobile ? '8px' : '10px',
+            backgroundColor: '#ff4444',
+            color: 'white',
+            border: 'none',
+            borderRadius: '5px',
+            cursor: 'pointer',
+            fontSize: isMobile ? '12px' : '14px',
+            fontWeight: 'bold'
+          }}
+        >
+          Reset Simulation
+        </button>
+      </div>
+      )}
     </div>
   );
 };
 
 export default ImpactResultsPanel;
+
+// Add keyframe animation in a style tag or CSS file
+const style = document.createElement('style');
+style.textContent = `
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+`;
+document.head.appendChild(style);

@@ -56,6 +56,11 @@ function MapComponent({ onBack }) {
         const response = await fetch(
           `https://api.nasa.gov/neo/rest/v1/feed?start_date=${today}&end_date=${endDate}&api_key=${NASA_API_KEY}`
         );
+
+        if (!response.ok) {
+          throw new Error(`API returned ${response.status}`);
+        }
+
         const data = await response.json();
 
         // Flatten all asteroids from all dates
@@ -131,10 +136,14 @@ function MapComponent({ onBack }) {
         const location = { longitude: targetLng, latitude: targetLat };
         setImpactLocation(location);
         const impact = calculateImpact(asteroid, location);
-        setImpactData(impact);
 
         // Trigger shockwave animation
         animateShockwave();
+
+        // Delay showing impact data by 2 seconds
+        setTimeout(() => {
+          setImpactData(impact);
+        }, 2000);
 
         // Trigger chat popup
         sendWebhookData(targetLng, targetLat, asteroid.diameter);

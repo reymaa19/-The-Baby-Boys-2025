@@ -108,6 +108,167 @@ export function EarthFacts({ player, onBack, onLaunch }) {
   )
 }
 
+export function AsteroidQuiz({ player, onBack, onContinue }) {
+  const [currentQuestion, setCurrentQuestion] = useState(0)
+  const [score, setScore] = useState(0)
+  const [selectedAnswer, setSelectedAnswer] = useState(null)
+  const [showResult, setShowResult] = useState(false)
+  const [quizComplete, setQuizComplete] = useState(false)
+
+  const questions = [
+    {
+      question: "How fast can asteroids travel through space?",
+      options: [
+        "As fast as a car (100 km/h)",
+        "As fast as a bullet (1 km/s)",
+        "Up to 70 km/s or more",
+        "Asteroids don't move"
+      ],
+      correct: 2,
+      explanation: "Asteroids can travel at incredible speeds - some reaching over 70 km/s! That's about 252,000 km/h!"
+    },
+    {
+      question: "What happened 66 million years ago?",
+      options: [
+        "First asteroid was discovered",
+        "Asteroid impact killed the dinosaurs",
+        "Moon was formed",
+        "First humans appeared"
+      ],
+      correct: 1,
+      explanation: "A massive asteroid impact in Mexico's Yucatan Peninsula caused the extinction of the dinosaurs and 75% of all species on Earth!"
+    },
+    {
+      question: "How many asteroids does NASA track?",
+      options: [
+        "About 100",
+        "About 1,000",
+        "Over 1,000,000",
+        "We don't track asteroids"
+      ],
+      correct: 2,
+      explanation: "NASA tracks over 1 million asteroids! Most are harmless, but we keep a close eye on Near-Earth Objects (NEOs)."
+    },
+    {
+      question: "What would happen if a 1 km asteroid hit Earth today?",
+      options: [
+        "Nothing major",
+        "A small crater",
+        "Regional devastation",
+        "Global catastrophe"
+      ],
+      correct: 3,
+      explanation: "A 1 km asteroid impact would cause global catastrophe - massive tsunamis, earthquakes, and years of climate change from debris blocking sunlight!"
+    }
+  ]
+
+  const handleAnswer = (answerIndex) => {
+    setSelectedAnswer(answerIndex)
+    setShowResult(true)
+
+    if (answerIndex === questions[currentQuestion].correct) {
+      setScore(score + 1)
+    }
+  }
+
+  const handleNext = () => {
+    if (currentQuestion < questions.length - 1) {
+      setCurrentQuestion(currentQuestion + 1)
+      setSelectedAnswer(null)
+      setShowResult(false)
+    } else {
+      setQuizComplete(true)
+    }
+  }
+
+  const getScoreMessage = () => {
+    const percentage = (score / questions.length) * 100
+    if (percentage === 100) return "Perfect! You're a true Space Cadet! 🌟"
+    if (percentage >= 75) return "Excellent work! You really know your asteroids! 🚀"
+    if (percentage >= 50) return "Good job! You're learning fast! 👍"
+    return "Nice try! You'll learn more in the simulator! 💫"
+  }
+
+  return (
+    <div className="mission-root">
+      <div className="mission-card" style={{ maxWidth: '900px' }}>
+        <img src={'/jeremyhansenfront.png'} alt="Jeremy Hansen" className="mission-img"/>
+        <div className="mission-copy">
+          {!quizComplete ? (
+            <>
+              <h2>Asteroid Knowledge Quiz</h2>
+              <p className="lead">Question {currentQuestion + 1} of {questions.length}</p>
+
+              <div className="quiz-container">
+                <p className="quiz-question">{questions[currentQuestion].question}</p>
+
+                <div className="quiz-options">
+                  {questions[currentQuestion].options.map((option, index) => (
+                    <button
+                      key={index}
+                      onClick={() => !showResult && handleAnswer(index)}
+                      disabled={showResult}
+                      className={`quiz-option ${
+                        showResult && index === questions[currentQuestion].correct
+                          ? 'correct'
+                          : showResult && index === selectedAnswer
+                          ? 'incorrect'
+                          : selectedAnswer === index
+                          ? 'selected'
+                          : ''
+                      }`}
+                    >
+                      {option}
+                    </button>
+                  ))}
+                </div>
+
+                {showResult && (
+                  <div className={`quiz-result ${selectedAnswer === questions[currentQuestion].correct ? 'correct-result' : 'incorrect-result'}`}>
+                    <p className="result-title">
+                      {selectedAnswer === questions[currentQuestion].correct ? '✅ Correct!' : '❌ Not quite!'}
+                    </p>
+                    <p className="result-explanation">{questions[currentQuestion].explanation}</p>
+                    <button className="primary" onClick={handleNext}>
+                      {currentQuestion < questions.length - 1 ? 'Next Question →' : 'See Results'}
+                    </button>
+                  </div>
+                )}
+
+                {!showResult && (
+                  <div className="quiz-progress">
+                    <div className="progress-bar">
+                      <div
+                        className="progress-fill"
+                        style={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
+                      />
+                    </div>
+                  </div>
+                )}
+              </div>
+            </>
+          ) : (
+            <>
+              <h2>Quiz Complete! 🎉</h2>
+              <div className="quiz-score">
+                <p className="score-big">Your Score: {score}/{questions.length}</p>
+                <p className="score-message">{getScoreMessage()}</p>
+              </div>
+              <p style={{ marginTop: '1.5rem', fontSize: '1.1rem' }}>
+                Great job, {player}! Now you're ready to see these concepts in action with the Crater Maker simulator.
+              </p>
+              <div className="mission-actions" style={{ marginTop: '2rem' }}>
+                <button className="secondary" onClick={onBack}>Back</button>
+                <button className="primary" onClick={onContinue}>Continue to Simulator →</button>
+              </div>
+            </>
+          )}
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export function CraterMaker({ player, onBack }) {
   return (
     <div className="crater-root">

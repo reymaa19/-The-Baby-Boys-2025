@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import StartupPopup from './components/StartupPopup';
-import { JeremyIntro, MissionIntro, EarthFacts, CraterMaker } from './components/introduction/Onboarding';
+import { JeremyIntro, MissionIntro, AsteroidQuiz, EarthFacts, CraterMaker } from './components/introduction/Onboarding';
 import MapComponent from './components/Map';
 import NASADashboard from './components/NASADashboard';
 
@@ -24,6 +24,10 @@ function App() {
   };
 
   const handleMissionContinue = () => {
+    setCurrentStep('quiz');
+  };
+
+  const handleQuizContinue = () => {
     setCurrentStep('facts');
   };
 
@@ -45,6 +49,10 @@ function App() {
 
   const handleBackToFacts = () => {
     setCurrentStep('facts');
+  };
+
+  const handleBackToQuiz = () => {
+    setCurrentStep('quiz');
   };
 
   const handleContinueToDashboard = (asteroids) => {
@@ -71,8 +79,11 @@ function App() {
       {!showStartup && currentStep === 'mission' && (
         <MissionIntro player={playerName} onBack={handleBackToIntro} onContinue={handleMissionContinue} />
       )}
+      {!showStartup && currentStep === 'quiz' && (
+        <AsteroidQuiz player={playerName} onBack={handleBackToMission} onContinue={handleQuizContinue} />
+      )}
       {!showStartup && currentStep === 'facts' && (
-        <EarthFacts player={playerName} onBack={handleBackToMission} onLaunch={handleLaunchCraterMaker} />
+        <EarthFacts player={playerName} onBack={handleBackToQuiz} onLaunch={handleLaunchCraterMaker} />
       )}
       {!showStartup && currentStep === 'crater' && (
         <CraterMaker player={playerName} onBack={handleBackToFacts} onLaunch={handleLaunchCraterMaker} />

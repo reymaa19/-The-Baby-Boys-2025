@@ -67,6 +67,8 @@ The Asteroid Impact Simulator is an educational web application developed for th
 
 # Team
 
+**The Baby Boys**
+
 - Gino Pursina
 - Ryan Le
 - Reynald Maala

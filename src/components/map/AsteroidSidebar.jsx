@@ -27,16 +27,28 @@ const AsteroidSidebar = ({
       width: isMobile ? '85vw' : '350px',
       maxWidth: '350px',
       height: '100%',
-      backgroundColor: 'rgba(0, 0, 0, 0.95)',
+      background: 'rgba(0, 0, 0, 0.7)',
+      backdropFilter: 'blur(15px)',
       color: 'white',
       padding: '20px',
       overflowY: 'auto',
       zIndex: 2,
-      boxShadow: '2px 0 10px rgba(0,0,0,0.5)',
+      boxShadow: '2px 0 20px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255, 255, 255, 0.05)',
+      border: 'none',
+      borderRight: '1px solid rgba(255, 255, 255, 0.1)',
       transition: 'left 0.3s ease'
     }}>
-      <h2 style={{ margin: '0 0 20px 0', fontSize: isMobile ? '20px' : '24px' }}>
-        🌠 Asteroid Impact Simulator
+      <h2 style={{
+        margin: '0 0 20px 0',
+        fontSize: isMobile ? '20px' : '24px',
+        background: 'linear-gradient(45deg, #ff6b35, #f7931e)',
+        WebkitBackgroundClip: 'text',
+        WebkitTextFillColor: 'transparent',
+        backgroundClip: 'text',
+        fontFamily: 'Arial Black, Arial, sans-serif',
+        letterSpacing: '0.5px'
+      }}>
+        Asteroid Impact Simulator
       </h2>
 
       {onBack && (
@@ -46,7 +58,9 @@ const AsteroidSidebar = ({
             width: '100%',
             padding: '10px',
             marginBottom: '20px',
-            backgroundColor: '#444',
+            background: 'rgba(255, 255, 255, 0.1)',
+            backdropFilter: 'blur(10px)',
+            border: '2px solid rgba(255, 255, 255, 0.2)',
             color: 'white',
             border: 'none',
             borderRadius: '5px',

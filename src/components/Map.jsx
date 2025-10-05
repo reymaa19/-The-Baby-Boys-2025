@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Map, { NavigationControl, Marker, Layer, Source } from 'react-map-gl/mapbox';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import './Map.css';
 import ChatPopup from './ChatPopup';
 import AsteroidSidebar from './map/AsteroidSidebar';
 import ImpactResultsPanel from './map/ImpactResultsPanel';
@@ -255,7 +256,7 @@ function MapComponent({ onBack }) {
   const isMobile = window.innerWidth <= 768;
 
   return (
-    <div style={{ width: '100%', height: '100vh', position: 'relative' }}>
+    <div className="map-container">
       {/* Mobile Menu Toggle */}
       <button
         onClick={() => setIsSidebarOpen(!isSidebarOpen)}
@@ -298,22 +299,23 @@ function MapComponent({ onBack }) {
 
       {/* Targeting Instruction */}
       {targetingMode && (
-        <div style={{
+        <div className="targeting-banner" style={{
           position: 'absolute',
           top: '10px',
           left: '50%',
           transform: 'translateX(-50%)',
-          backgroundColor: '#ff6b00',
           color: 'white',
           padding: isMobile ? '10px 15px' : '15px 30px',
-          borderRadius: '8px',
+          borderRadius: '50px',
           zIndex: 2,
           fontSize: isMobile ? '14px' : '18px',
           fontWeight: 'bold',
-          boxShadow: '0 4px 10px rgba(0,0,0,0.5)',
-          animation: 'pulse 2s infinite',
           maxWidth: isMobile ? '90%' : 'none',
-          textAlign: 'center'
+          textAlign: 'center',
+          animation: 'pulse 2s infinite',
+          fontFamily: 'Arial Black, Arial, sans-serif',
+          letterSpacing: '1px',
+          textTransform: 'uppercase'
         }}>
           🎯 {isMobile ? 'Tap' : 'Click'} map to simulate impact
         </div>

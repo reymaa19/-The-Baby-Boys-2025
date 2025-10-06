@@ -1,0 +1,167 @@
+[
+  {
+    "question": "How fast can asteroids travel through space?",
+    "options": [
+      "As fast as a car (100 km/h)",
+      "As fast as a bullet (1 km/s)",
+      "Up to 70 km/s or more",
+      "Asteroids don't move"
+    ],
+    "correct": 2,
+    "explanation": "Asteroids can travel at incredible speeds - some reaching over 70 km/s! That's about 252,000 km/h!"
+  },
+  {
+    "question": "What happened 66 million years ago?",
+    "options": [
+      "First asteroid was discovered",
+      "Asteroid impact killed the dinosaurs",
+      "Moon was formed",
+      "First humans appeared"
+    ],
+    "correct": 1,
+    "explanation": "A massive asteroid impact in Mexico's Yucatan Peninsula caused the extinction of the dinosaurs and 75% of all species on Earth!"
+  },
+  {
+    "question": "How many asteroids does NASA track?",
+    "options": [
+      "About 100",
+      "About 1,000",
+      "Over 1,000,000",
+      "We don't track asteroids"
+    ],
+    "correct": 2,
+    "explanation": "NASA tracks over 1 million asteroids! Most are harmless, but we keep a close eye on Near-Earth Objects (NEOs)."
+  },
+  {
+    "question": "What would happen if a 1 km asteroid hit Earth today?",
+    "options": [
+      "Nothing major",
+      "A small crater",
+      "Regional devastation",
+      "Global catastrophe"
+    ],
+    "correct": 3,
+    "explanation": "A 1 km asteroid impact would cause global catastrophe - massive tsunamis, earthquakes, and years of climate change from debris blocking sunlight!"
+  },
+  {
+    "question": "What is the name of NASA's planetary defense mission that successfully changed an asteroid's orbit?",
+    "options": [
+      "DART (Double Asteroid Redirection Test)",
+      "HAMMER (Hypervelocity Asteroid Mitigation Mission)",
+      "Asteroid Shield",
+      "Deep Impact"
+    ],
+    "correct": 0,
+    "explanation": "DART successfully impacted the asteroid Dimorphos in 2022, changing its orbit and proving we can deflect asteroids!"
+  },
+  {
+    "question": "What percentage of Earth's surface is covered by water?",
+    "options": [
+      "50%",
+      "61%",
+      "71%",
+      "81%"
+    ],
+    "correct": 2,
+    "explanation": "About 71% of Earth's surface is water, which means most asteroid impacts would likely hit ocean!"
+  },
+  {
+    "question": "How often does a car-sized asteroid hit Earth's atmosphere?",
+    "options": [
+      "Once a century",
+      "Once a year",
+      "Once a month",
+      "Almost every day"
+    ],
+    "correct": 1,
+    "explanation": "A car-sized asteroid enters Earth's atmosphere approximately once per year, but most burn up before reaching the ground!"
+  },
+  {
+    "question": "What was the Tunguska event?",
+    "options": [
+      "A volcanic eruption in Russia",
+      "An asteroid explosion over Siberia in 1908",
+      "The first moon landing",
+      "Discovery of the first asteroid"
+    ],
+    "correct": 1,
+    "explanation": "In 1908, an asteroid exploded over Siberia, flattening 2,000 square kilometers of forest. Imagine if it hit a city!"
+  },
+  {
+    "question": "What's the estimated number of potentially hazardous asteroids (PHAs) larger than 140 meters?",
+    "options": [
+      "About 500",
+      "About 2,500",
+      "About 25,000",
+      "Over 100,000"
+    ],
+    "correct": 2,
+    "explanation": "Scientists estimate there are about 25,000 near-Earth asteroids larger than 140 meters, but we've only found about 40% of them so far!"
+  },
+  {
+    "question": "What causes most asteroids to burn up in Earth's atmosphere?",
+    "options": [
+      "The cold temperature of space",
+      "Earth's magnetic field",
+      "Friction from air resistance",
+      "Solar radiation"
+    ],
+    "correct": 2,
+    "explanation": "When asteroids enter Earth's atmosphere at high speed, friction with air molecules creates intense heat that vaporizes smaller asteroids!"
+  },
+  {
+    "question": "Where is the asteroid belt located in our solar system?",
+    "options": [
+      "Between Earth and Mars",
+      "Between Mars and Jupiter",
+      "Between Jupiter and Saturn",
+      "Beyond Neptune"
+    ],
+    "correct": 1,
+    "explanation": "The main asteroid belt is located between Mars and Jupiter, containing millions of rocky objects left over from the solar system's formation!"
+  },
+  {
+    "question": "What would happen if we tried to blow up an incoming asteroid with a nuclear weapon?",
+    "options": [
+      "It would completely vaporize",
+      "It would create many dangerous fragments",
+      "Nothing would happen",
+      "It would safely deflect away"
+    ],
+    "correct": 1,
+    "explanation": "Blowing up an asteroid could create many radioactive fragments still heading toward Earth - deflection is safer than destruction!"
+  },
+  {
+    "question": "How much advance warning would we need to deflect a dangerous asteroid?",
+    "options": [
+      "A few days",
+      "A few months",
+      "At least 5-10 years",
+      "100 years"
+    ],
+    "correct": 2,
+    "explanation": "We need years or decades of advance warning to successfully deflect an asteroid. That's why early detection is so critical!"
+  },
+  {
+    "question": "What created Meteor Crater in Arizona?",
+    "options": [
+      "A volcanic eruption",
+      "A meteor impact 50,000 years ago",
+      "Ancient mining operations",
+      "Erosion over millions of years"
+    ],
+    "correct": 1,
+    "explanation": "A 50-meter asteroid struck Arizona about 50,000 years ago, creating a crater 1.2 km wide and 170 meters deep!"
+  },
+  {
+    "question": "What's the difference between a meteoroid, meteor, and meteorite?",
+    "options": [
+      "They're all the same thing",
+      "Size: small, medium, large",
+      "Location: space, atmosphere, ground",
+      "Composition: rock, ice, metal"
+    ],
+    "correct": 2,
+    "explanation": "A meteoroid is in space, a meteor is burning through the atmosphere (shooting star), and a meteorite has landed on Earth!"
+  }
+]

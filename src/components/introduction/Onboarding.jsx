@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './Onboarding.css'
+import allQuizQuestions from '../../data/quizQuestions.json'
 
 export function AstronautIntro({ onComplete, onStartMission }) {
   const [name, setName] = useState('')
@@ -109,58 +110,17 @@ export function EarthFacts({ player, onBack, onLaunch }) {
 }
 
 export function AsteroidQuiz({ player, onBack, onContinue }) {
+  // Randomly select 4 questions when component mounts
+  const [questions] = useState(() => {
+    const shuffled = [...allQuizQuestions].sort(() => Math.random() - 0.5)
+    return shuffled.slice(0, 4)
+  })
+
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [score, setScore] = useState(0)
   const [selectedAnswer, setSelectedAnswer] = useState(null)
   const [showResult, setShowResult] = useState(false)
   const [quizComplete, setQuizComplete] = useState(false)
-
-  const questions = [
-    {
-      question: "How fast can asteroids travel through space?",
-      options: [
-        "As fast as a car (100 km/h)",
-        "As fast as a bullet (1 km/s)",
-        "Up to 70 km/s or more",
-        "Asteroids don't move"
-      ],
-      correct: 2,
-      explanation: "Asteroids can travel at incredible speeds - some reaching over 70 km/s! That's about 252,000 km/h!"
-    },
-    {
-      question: "What happened 66 million years ago?",
-      options: [
-        "First asteroid was discovered",
-        "Asteroid impact killed the dinosaurs",
-        "Moon was formed",
-        "First humans appeared"
-      ],
-      correct: 1,
-      explanation: "A massive asteroid impact in Mexico's Yucatan Peninsula caused the extinction of the dinosaurs and 75% of all species on Earth!"
-    },
-    {
-      question: "How many asteroids does NASA track?",
-      options: [
-        "About 100",
-        "About 1,000",
-        "Over 1,000,000",
-        "We don't track asteroids"
-      ],
-      correct: 2,
-      explanation: "NASA tracks over 1 million asteroids! Most are harmless, but we keep a close eye on Near-Earth Objects (NEOs)."
-    },
-    {
-      question: "What would happen if a 1 km asteroid hit Earth today?",
-      options: [
-        "Nothing major",
-        "A small crater",
-        "Regional devastation",
-        "Global catastrophe"
-      ],
-      correct: 3,
-      explanation: "A 1 km asteroid impact would cause global catastrophe - massive tsunamis, earthquakes, and years of climate change from debris blocking sunlight!"
-    }
-  ]
 
   const handleAnswer = (answerIndex) => {
     setSelectedAnswer(answerIndex)

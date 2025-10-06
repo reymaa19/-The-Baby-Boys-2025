@@ -28,7 +28,7 @@
   100% { transform: scale(1); opacity: 1; }
 }
 
-.jeremy-hero { 
+.astronaut-hero { 
   min-height: 100vh; 
   display: flex; 
   align-items: center; 
@@ -39,7 +39,7 @@
   overflow: hidden;
 }
 
-.jeremy-hero::before {
+.astronaut-hero::before {
   content: '';
   position: absolute;
   top: 0;
@@ -59,7 +59,7 @@
   z-index: 1;
 }
 
-.jeremy-content { 
+.astronaut-content { 
   display: flex; 
   flex-direction: column; 
   gap: 2rem; 
@@ -83,7 +83,7 @@
   animation: floatUp 0.8s ease-out 0.3s both;
 }
 
-.jeremy-img { 
+.astronaut-img { 
   position: absolute; 
   left: -40px; 
   top: 0; 
@@ -123,7 +123,7 @@
   transform: scale(0.95);
 }
 
-.jeremy-name { 
+.astronaut-name { 
   position: absolute; 
   left: 25px; 
   top: 20px; 
@@ -157,7 +157,7 @@
 }
 
 @media (max-width: 768px) {
-  .jeremy-content { 
+  .astronaut-content { 
     flex-direction: column; 
     text-align: center;
     padding: 1rem;
@@ -168,7 +168,7 @@
     height: 400px;
   }
   
-  .jeremy-img { 
+  .astronaut-img { 
     position: static; 
     width: 300px; 
     height: 400px; 
@@ -176,7 +176,7 @@
     left: 0;
   }
   
-  .jeremy-name { 
+  .astronaut-name { 
     position: static; 
     font-size: 2rem;
     margin-bottom: 1rem;

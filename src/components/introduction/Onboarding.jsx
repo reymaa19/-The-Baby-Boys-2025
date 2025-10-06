@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './Onboarding.css'
 
-export function JeremyIntro({ onComplete, onStartMission }) {
+export function AstronautIntro({ onComplete, onStartMission }) {
   const [name, setName] = useState('')
   const [submitted, setSubmitted] = useState(false)
 
@@ -15,16 +15,16 @@ export function JeremyIntro({ onComplete, onStartMission }) {
   return (
     <div className="intro-root">
       <div className="intro-card">
-        <img src={'/jeremyhansenfront.png'} alt="Jeremy Ransen speaking" className="intro-img"/>
+        <img src={'/astronaut.png'} alt="Astronaut speaking (AI-generated)" className="intro-img"/>
 
         <div className="speech">
           {!submitted ? (
             <>
-              <p className="speech-text">"Hello there, Space Cadet. My name is Jeremy Ransen and I'm a Canadian Astronaut! I don't know you quite yet, what's your name?"</p>
+              <p className="speech-text">"Hello there, Space Cadet. My name is Marcus Reid and I'm a Canadian Astronaut! I don't know you quite yet, what's your name?"</p>
 
               <form className="name-form" onSubmit={handleSubmit}>
                 <input value={name} onChange={e => setName(e.target.value)} placeholder="Enter your name" aria-label="Your name" />
-                <button type="submit" className="primary">Tell Jeremy</button>
+                <button type="submit" className="primary">Tell Astronaut</button>
               </form>
             </>
           ) : (
@@ -55,7 +55,7 @@ export function MissionIntro({ player, onBack, onContinue }) {
   return (
     <div className="mission-root">
       <div className="mission-card">
-        <img src={'/jeremyhansenfront.png'} alt="Jeremy Ransen" className="mission-img"/>
+        <img src={'/astronaut.png'} alt="Astronaut (AI-generated)" className="mission-img"/>
         <div className="mission-copy">
           <h2>Alright Cadet {player}, nice to meet you!</h2>
           <p className="lead">Let me show you around.</p>
@@ -92,7 +92,7 @@ export function EarthFacts({ player, onBack, onLaunch }) {
   return (
     <div className="facts-root">
       <div className="facts-card">
-        <img src={'/jeremyhansenfront.png'} alt="Jeremy Ransen" className="facts-img"/>
+        <img src={'/astronaut.png'} alt="Astronaut (AI-generated)" className="facts-img"/>
         <div className="facts-copy">
           <h2>Hey Cadet {player}!</h2>
           <div className="crater">
@@ -192,7 +192,7 @@ export function AsteroidQuiz({ player, onBack, onContinue }) {
   return (
     <div className="mission-root">
       <div className="mission-card" style={{ maxWidth: '900px' }}>
-        <img src={'/jeremyhansenfront.png'} alt="Jeremy Ransen" className="mission-img"/>
+        <img src={'/astronaut.png'} alt="Astronaut (AI-generated)" className="mission-img"/>
         <div className="mission-copy">
           {!quizComplete ? (
             <>

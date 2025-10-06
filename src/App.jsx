@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import StartupPopup from './components/StartupPopup';
-import { JeremyIntro, MissionIntro, AsteroidQuiz, EarthFacts, CraterMaker } from './components/introduction/Onboarding';
+import { AstronautIntro, MissionIntro, AsteroidQuiz, EarthFacts, CraterMaker } from './components/introduction/Onboarding';
 import MapComponent from './components/Map';
 import NASADashboard from './components/NASADashboard';
 
@@ -74,7 +74,7 @@ function App() {
     <div style={appStyle}>
       {showStartup && <StartupPopup onStart={handleStart} />}
       {!showStartup && currentStep === 'intro' && (
-        <JeremyIntro onComplete={handleIntroComplete} onStartMission={handleStartMission} />
+        <AstronautIntro onComplete={handleIntroComplete} onStartMission={handleStartMission} />
       )}
       {!showStartup && currentStep === 'mission' && (
         <MissionIntro player={playerName} onBack={handleBackToIntro} onContinue={handleMissionContinue} />

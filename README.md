@@ -1,7 +1,7 @@
 # Asteroid Impact Simulator
 
 ## NASA Space Apps Challenge 2025 Submission - Team "The Baby Boys"
-![Asteroid Impact Simulator](./public/jeremyhansenfront.png)
+![Asteroid Impact Simulator](./public/astronaut.png)
 
 ## Live Demo
 
